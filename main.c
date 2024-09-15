@@ -1,4 +1,5 @@
 #include "util.c"
+#include "sound.c"
 #include <raylib.h>
 
 #define ARR_SIZE 64
@@ -21,6 +22,8 @@ int main() {
   SetConfigFlags(FLAG_WINDOW_RESIZABLE);
   InitWindow(960, 540, "Sort Algo");
 
+  init_sound();
+
   SetTargetFPS(60);
 
   int a[256];
@@ -30,11 +33,16 @@ int main() {
   int cursor = 0;
   int iteration = 0;
 
+  play_note(32);
+
   while (!WindowShouldClose()) {
     BeginDrawing();
 
     ClearBackground(BLACK);
     bubble_step(a, ARR_SIZE, &cursor, &iteration, 3);
+    if (!is_sorted(a, ARR_SIZE)) {
+        play_note( 32 + ((float)a[cursor] / ARR_SIZE) * 32);
+    }
     draw_list(a, ARR_SIZE, ARR_SIZE, GetScreenWidth(), GetScreenHeight(), 8, 2,
               cursor);
 
@@ -47,5 +55,6 @@ int main() {
     EndDrawing();
   }
 
+  deinit_sound();
   CloseWindow();
 }
