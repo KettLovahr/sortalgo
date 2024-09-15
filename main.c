@@ -41,7 +41,7 @@ int main() {
     ClearBackground(BLACK);
     bubble_step(a, ARR_SIZE, &cursor, &iteration, 3);
     if (!is_sorted(a, ARR_SIZE)) {
-        play_note( 32 + ((float)a[cursor] / ARR_SIZE) * 32);
+        play_note( 0.5 + ((float)a[cursor] / ARR_SIZE) * 2);
     }
     draw_list(a, ARR_SIZE, ARR_SIZE, GetScreenWidth(), GetScreenHeight(), 8, 2,
               cursor);
@@ -55,6 +55,5 @@ int main() {
     EndDrawing();
   }
 
-  deinit_sound();
   CloseWindow();
 }
