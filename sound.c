@@ -2,15 +2,22 @@
 #include <raylib.h>
 #include <stdio.h>
 
-Sound beep;
+#define SLOTS 32
+
+static Sound beep[SLOTS];
+static int cursor = 0;
 
 int init_sound() {
     InitAudioDevice();
-    beep = LoadSound("beep.wav");
+    for (int i = 0; i < SLOTS; i++) {
+        beep[i] = LoadSound("beep.wav");
+    }
     return 0;
 }
 
 void play_note(float pitch) {
-    SetSoundPitch(beep, pitch);
-    PlaySound(beep);
+    StopSound(beep[cursor]);
+    SetSoundPitch(beep[cursor], pitch);
+    PlaySound(beep[cursor]);
+    cursor = (cursor + 1) % 5;
 }
