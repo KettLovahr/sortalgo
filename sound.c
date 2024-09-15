@@ -1,6 +1,4 @@
-#define SUNVOX_MAIN
 #include <raylib.h>
-#include <stdio.h>
 
 #define SLOTS 32
 
