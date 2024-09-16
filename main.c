@@ -1,6 +1,7 @@
 #include "util.c"
 #include "sound.c"
 #include <raylib.h>
+#include <stdio.h>
 
 #define ARR_SIZE 64
 
@@ -58,7 +59,7 @@ int main() {
             cursor++;
         }
     }
-    draw_list(a, ARR_SIZE, ARR_SIZE, GetScreenWidth(), GetScreenHeight(), 8, 2,
+    draw_list(a, ARR_SIZE, ARR_SIZE, GetScreenWidth(), GetScreenHeight(), 8, 3,
             cursor, done);
 
     if (IsKeyPressed(KEY_SPACE)) {
