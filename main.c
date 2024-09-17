@@ -2,7 +2,12 @@
 #include "util.c"
 #include <raylib.h>
 
-#define ARR_SIZE 64
+// Size of the array to sort
+#define ARR_SIZE 40
+// How many steps to take before moving on to the next frame
+#define FRAME_STEPS 1
+// Target Frames Per Second
+#define FPS 60
 
 void draw_list(int a[], int length, int max_value, float width, float height,
                float margin, float padding, int cursor, bool done) {
@@ -29,9 +34,9 @@ int main() {
 
   init_sound();
 
-  SetTargetFPS(60);
+  SetTargetFPS(FPS);
 
-  int a[256];
+  int a[ARR_SIZE];
   populate_list(a, ARR_SIZE);
   print_list(a, ARR_SIZE);
 
@@ -44,7 +49,7 @@ int main() {
 
     ClearBackground(BLACK);
     if (!done) {
-      bubble_step(a, ARR_SIZE, &cursor, &iteration, 3);
+      bubble_step(a, ARR_SIZE, &cursor, &iteration, FRAME_STEPS);
       if (!is_sorted(a, ARR_SIZE)) {
         play_note(0.5 + ((float)a[cursor] / ARR_SIZE) * 2);
       } else {
